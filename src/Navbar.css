@@ -20,13 +20,18 @@
   padding: 0;
 }
 
-.nav-links li a {
+.nav-item {
   color: #ffffff;
   text-decoration: none;
   font-size: 1rem;
   transition: color 0.2s ease;
 }
 
-.nav-links li a:hover {
+.nav-item:hover {
   color: #4a6cf7;
+}
+
+.nav-item.active {
+  color: #4a6cf7;
+  font-weight: bold;
 }

@@ -1,35 +1,36 @@
 .streamlist-container {
-  max-width: 600px;
-  margin: 2rem auto;
-  padding: 1.5rem;
+  width: 400px;
+  margin: auto;
+  padding: 20px;
 }
 
-.streamlist-title {
-  text-align: center;
-  margin-bottom: 1rem;
-}
-
-.streamlist-input-row {
+.input-section {
   display: flex;
-  gap: 0.5rem;
+  gap: 10px;
 }
 
-.streamlist-input {
-  flex: 1;
-  padding: 0.5rem;
-}
-
-.streamlist-button {
-  padding: 0.5rem 1rem;
-}
-
-.streamlist-list {
-  margin-top: 1rem;
+.movie-list {
   list-style: none;
   padding: 0;
 }
 
-.streamlist-item {
-  padding: 0.5rem;
-  border-bottom: 1px solid #ddd;
+.movie-list li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 8px 0;
+}
+
+.completed .movie-title {
+  text-decoration: line-through;
+  color: green;
+}
+
+.material-icons {
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.material-icons:hover {
+  color: #007bff;
 }
