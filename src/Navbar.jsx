@@ -31,6 +31,12 @@ export default function Navbar() {
             About
           </NavLink>
         </li>
+
+        <li>
+          <NavLink to="/search" className="nav-item">
+            Search
+          </NavLink>
+        </li>
       </ul>
     </nav>
   );

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./StreamList.css";
 
 export default function StreamList() {
@@ -7,11 +7,23 @@ export default function StreamList() {
   const [editId, setEditId] = useState(null);
   const [editText, setEditText] = useState("");
 
+  // Load saved movies from LocalStorage on page load
+  useEffect(() => {
+    const saved = localStorage.getItem("movieList");
+    if (saved && saved !== "[]") {
+      setMovieList(JSON.parse(saved));
+    }
+  }, []);
+
+  // Save movies to LocalStorage whenever movieList changes
+  useEffect(() => {
+    localStorage.setItem("movieList", JSON.stringify(movieList));
+  }, [movieList]);
+
   // Add movie
   const handleAddMovie = () => {
     if (movie.trim() === "") return;
 
-    // Console logging
     console.log("StreamList item:", movie);
 
     const newMovie = {
@@ -21,7 +33,7 @@ export default function StreamList() {
     };
 
     setMovieList([...movieList, newMovie]);
-    setMovie(""); // Clear input
+    setMovie("");
   };
 
   // Delete movie
@@ -59,29 +71,24 @@ export default function StreamList() {
     <div className="streamlist-container">
       <h2>My StreamList</h2>
 
-      {/* Input Section */}
       <div className="input-section">
         <input
           type="text"
           placeholder="Add a movie..."
           value={movie}
           onChange={(e) => setMovie(e.target.value)}
-          onKeyDown={(e) => e.key === "Enter" && handleAddMovie()} // Enter key submission
+          onKeyDown={(e) => e.key === "Enter" && handleAddMovie()}
         />
         <button onClick={handleAddMovie}>Add</button>
-
-        {/* Clear All Button */}
         <button onClick={() => setMovieList([])}>Clear All</button>
       </div>
 
-      {/* Empty List Message OR Movie List */}
       {movieList.length === 0 ? (
         <p>No movies added yet. Start your list!</p>
       ) : (
         <ul className="movie-list">
           {movieList.map((item) => (
             <li key={item.id} className={item.completed ? "completed" : ""}>
-              {/* Editing Mode */}
               {editId === item.id ? (
                 <>
                   <input
@@ -100,7 +107,6 @@ export default function StreamList() {
                 <>
                   <span className="movie-title">{item.title}</span>
 
-                  {/* Icons */}
                   <span
                     className="material-icons edit-icon"
                     onClick={() => handleEditStart(item.id, item.title)}
